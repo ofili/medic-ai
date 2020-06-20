@@ -1,9 +1,16 @@
 package webhook
 
+import (
+	"fmt"
+	"github.com/ofili/medic-ai/client"
+	"io/ioutil"
+	"os"
+)
+
 // SubscribeWebhook ...
 func SubscribeWebhook(){
 	fmt.Println("Subscribing webapp...")
-	client := CreateClient()
+	client := client.CreateClient()
 	path := "https://api.twitter.com/1.1/account_activity/all/" + os.Getenv("WEBHOOK_ENV") + "/subscriptions.json"
 	resp, _ := client.PostForm(path, nil)
 	body, _ := ioutil.ReadAll(resp.Body)

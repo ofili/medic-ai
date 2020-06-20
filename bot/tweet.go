@@ -1,5 +1,24 @@
 package bot
 
+import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"net/url"
+
+	"gitbub.com/ofili/medic-ai/client"
+)
+
+
+//Tweet struct to parse tweet
+type Tweet struct {
+	Id    int64
+	IdStr string `json:"id_str"`
+	User  User
+	Text  string
+}
+
+
 // SendTweet ... 
 func SendTweet(tweet string, reply_id string) (*Tweet, error) {
 	fmt.Println("Sending tweet as reply to " + reply_id)
@@ -10,7 +29,7 @@ func SendTweet(tweet string, reply_id string) (*Tweet, error) {
 	params.Set("status",tweet)
 	params.Set("in_reply_to_status_id",reply_id)
 	//Grab client and post
-	client := CreateClient()
+	client := client.CreateClient()
 	resp, err := client.PostForm("https://api.twitter.com/1.1/statuses/update.json",params)
 	if err != nil {
 		return nil, err

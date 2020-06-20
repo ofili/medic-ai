@@ -1,10 +1,27 @@
 package webhook
 
+import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"net/url"
+	"os"
+
+	"github.com/ofili/medic-ai/client"
+)
+
+
+// WebhookLoad struct to parse webhook load
+type WebhookLoad struct {
+	UserId           string  `json:"for_user_id"`
+	TweetCreateEvent []bot.Tweet `json:"tweet_create_events"`
+}
+
 
 // RegisterWebhook ...
 func RegisterWebhook(){
 	fmt.Println("Registering webhook...")
-	httpClient := CreateClient()
+	httpClient := client.CreateClient()
 
 	//Set parameters
 	path := "https://api.twitter.com/1.1/account_activity/all/" + os.Getenv("WEBHOOK_ENV") + "/webhooks.json"

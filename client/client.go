@@ -1,21 +1,11 @@
-package main
+package client
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/dghubble/oauth1"
-	"io/ioutil"
+	"github.com/ofili/medic-ai/bot"
 	"net/http"
-	"net/url"
 	"os"
 )
-
-// WebhookLoad struct to parse webhook load
-type WebhookLoad struct {
-	UserId           string  `json:"for_user_id"`
-	TweetCreateEvent []Tweet `json:"tweet_create_events"`
-}
-
 
 
 //Struct to parse user

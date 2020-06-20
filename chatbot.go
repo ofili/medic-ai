@@ -8,6 +8,8 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
+	"github.com/ofili/medic-ai/bot"
+	"github.com/ofili/medic-ai/webhook"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -25,7 +27,7 @@ func main() {
 	fmt.Println("Starting Server")
 
 	if args := os.Args; len(args) > 1 && args[1] == "-register" {
-		go registerWebhook()
+		go webhook.RegisterWebhook()
 	}
 	//Create a new Mux Handler
 	m := mux.NewRouter()
@@ -52,7 +54,7 @@ func WebhookHandler(writer http.ResponseWriter, request *http.Request) {
 	//Read the body of the tweet
 	body, _ := ioutil.ReadAll(request.Body)
 	//Initialize a webhok load obhject for json decoding
-	var load WebhookLoad
+	var load webhook.WebhookLoad
 	err := json.Unmarshal(body, &load)
 	if err != nil {
 		fmt.Println("An error occured: " + err.Error())
@@ -63,7 +65,7 @@ func WebhookHandler(writer http.ResponseWriter, request *http.Request) {
 	}
 	//Send Hello world as a reply to the tweet, replies need to begin with the handles
 	//of accounts they are replying to
-	_, err = SendTweet("@"+load.TweetCreateEvent[0].User.Handle+" Hello World", load.TweetCreateEvent[0].IdStr)
+	_, err = bot.SendTweet("@"+load.TweetCreateEvent[0].User.Handle+" Hello World", load.TweetCreateEvent[0].IdStr)
 	if err != nil {
 		fmt.Println("An error occured:")
 		fmt.Println(err.Error())
