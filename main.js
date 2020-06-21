@@ -1,26 +1,3 @@
-// let nigeria = {};
-// (async function(){
-//   fetch('https://covidnigeria.herokuapp.com/api')
-// .then(response => {
-//   if (response.ok) { 
-//     return response.json(); 
-//   } else {
-//     alert("HTTP-Error: " + response.status);
-//   }
-// })
-// .then(res => {
-//   console.log(res.data)
-//   nigeria.deaths = res.data.death;
-//   nigeria.discharged = res.data.discharged;
-//   nigeria.totalActiveCases = res.data.totalActiveCases;
-//   nigeria.totalConfirmedCases = res.data.totalConfirmedCases;
-//   nigeria.totalSamplesTested = res.data.totalSamplesTested;
-// })
-// .catch(err => {
-//   console.log(err)
-// })
-// }());
-
 // User phrase
 const trigger = [
     ["hi", "hey", "hello", "good morning", "good afternoon", "good evening", "what\'s up"],
